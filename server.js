@@ -66,7 +66,7 @@ app.use((err, _req, res, _next) => {
 
   // eslint-disable-next-line no-console
   console.error(err.stack);
-  res.sendStatus(500);
+  res.status(err.status || 500);
 });
 
 const port = process.env.PORT || 8000;
