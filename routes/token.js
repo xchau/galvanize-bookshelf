@@ -11,7 +11,7 @@ const { camelizeKeys } = require('humps');
 const router = express.Router();
 
 router.get('/token', (req, res) => {
-  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, _claim) => {
+  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, _payload) => {
     if (err) {
       return res.send(false);
     }
@@ -46,7 +46,9 @@ router.post('/token', (req, res, next) => {
     })
     .then(() => {
       const claim = { userId: user.id };
-      const token = jwt.sign(claim, process.env.JWT_KEY);
+      const token = jwt.sign(claim, process.env.JWT_KEY, {
+        expiresIn: '7 days'
+      });
 
       res.cookie('token', token, {
         httpOnly: true,
