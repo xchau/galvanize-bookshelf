@@ -45,7 +45,7 @@ router.post('/books', (req, res, next) => {
   const { title, author, genre, description, coverUrl } = req.body;
 
   if (!title || !title.trim()) {
-    return next(boom.create(400, 'Title must not be blank')); // ? not throw
+    return next(boom.create(400, 'Title must not be blank'));
   }
   if (!author || !author.trim()) {
     return next(boom.create(400, 'Author must not be blank'));
