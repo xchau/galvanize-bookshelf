@@ -1,10 +1,10 @@
 /* eslint-disable camelcase, max-len */
-
 'use strict';
 
 const bcrypt = require('bcrypt-as-promised');
 const boom = require('boom');
 const express = require('express');
+const ev = require('express-validation');
 const jwt = require('jsonwebtoken');
 const knex = require('../knex');
 const { camelizeKeys } = require('humps');
@@ -12,16 +12,9 @@ const { camelizeKeys } = require('humps');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.post('/users', (req, res, next) => {
+router.post('/users', ev(validation), (req, res, next) => {
   const email = req.body.email;
   const pw = req.body.password;
-
-  if (!email || !email.trim()) {
-    return next(boom.create(400, 'Email must not be blank'));
-  }
-  if (!pw || pw.length < 8) {
-    return next(boom.create(400, 'Password must be at least 8 characters long'));
-  }
 
   knex('users')
     .where('email', email)
