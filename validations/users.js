@@ -6,7 +6,6 @@ module.exports.post = {
   body: {
     email: Joi.string()
       .label('Email')
-<<<<<<< HEAD
       .email()
       .required()
       .trim()
@@ -17,16 +16,5 @@ module.exports.post = {
       .required()
       .trim()
       .min(8)
-=======
-      .required()
-      .email()
-      .trim(),
-
-    password: Joi.string()
-      .label('Password')
-      .required()
-      .min(8)
-      .trim()
->>>>>>> boom-only
   }
 };
