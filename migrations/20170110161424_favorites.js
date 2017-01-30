@@ -3,9 +3,9 @@
 exports.up = function(knex) {
   return knex.schema.createTable('favorites', (table) => {
     table.increments();
-    table.integer('book_id')
+    table.integer('book_id').unsigned();
+    table.foreign('book_id')
       .references('books.id')
-      .inTable('books')
       .notNullable()
       .onDelete('CASCADE')
       .index();
